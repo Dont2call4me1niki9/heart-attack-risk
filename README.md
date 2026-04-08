@@ -43,10 +43,9 @@ pip install -r requirements.txt
 ```
 ## Формат ответа
 
-``{
+```{
   "status": "ok",
   "rows": 966,
   "output_path": "data/predictions.csv"
 }
-
----
+```
