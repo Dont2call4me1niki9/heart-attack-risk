@@ -25,15 +25,14 @@ pip install -r requirements.txt
 """Core package for heart attack risk prediction project."""
 
 ## Обучение модели
-```python scripts/train.py --train-path data/heart_train.csv --model-path models/model.cbm --metadata-path models/metadata.json
-```
+```python scripts/train.py --train-path data/heart_train.csv --model-path models/model.cbm --metadata-path models/metadata.json ```
 ## Предсказание
-``` python scripts/predict.py --test-path data/heart_test.csv --model-path models/model.cbm --metadata-path models/metadata.json --output-path data/predictions.csv
-```
+``` python scripts/predict.py --test-path data/heart_test.csv --model-path models/model.cbm --metadata-path models/metadata.json --output-path data/predictions.csv ```
+
 ## Запуск API
 
-```uvicorn api.main:app --reload
-```
+```uvicorn api.main:app --reload```
+
 ## Пример запроса
 ```curl -X POST "http://127.0.0.1:8000/predict" \
   -H "Content-Type: application/json" \
@@ -51,10 +50,3 @@ pip install -r requirements.txt
 }
 
 ---
-
-# 3. Папка `src`
-
-## Файл: `src/__init__.py`
-
-```python
-"""Core package for heart attack risk prediction project."""
