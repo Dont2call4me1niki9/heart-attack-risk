@@ -17,3 +17,44 @@ python -m venv .venv
 source .venv/bin/activate  # Linux / Mac
 # .venv\Scripts\activate   # Windows
 pip install -r requirements.txt
+
+## Для Windows:
+
+.venv\Scripts\activate
+pip install -r requirements.txt
+"""Core package for heart attack risk prediction project."""
+
+## Обучение модели
+```python scripts/train.py --train-path data/heart_train.csv --model-path models/model.cbm --metadata-path models/metadata.json
+
+## Предсказание
+``` python scripts/predict.py --test-path data/heart_test.csv --model-path models/model.cbm --metadata-path models/metadata.json --output-path data/predictions.csv
+
+## Запуск API
+
+```uvicorn api.main:app --reload
+
+## Пример запроса
+```curl -X POST "http://127.0.0.1:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "csv_path": "data/heart_test.csv",
+    "output_path": "data/predictions.csv"
+  }'
+
+## Формат ответа
+
+``{
+  "status": "ok",
+  "rows": 966,
+  "output_path": "data/predictions.csv"
+}
+
+---
+
+# 3. Папка `src`
+
+## Файл: `src/__init__.py`
+
+```python
+"""Core package for heart attack risk prediction project."""
