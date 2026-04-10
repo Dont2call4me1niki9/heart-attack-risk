@@ -1,51 +1,19 @@
-# heart-attack-risk
-Проект по предсказанию рисков сердечных приступов
+# Проект: Предсказание риска сердечного приступа
 
-## Возможности
-- исследование и обучение модели в Jupyter Notebook;
-- обучение модели из командной строки;
-- предсказание для тестового CSV;
-- FastAPI сервис для инференса;
-- сохранение результата в формате `id,prediction`.
+## Описание
+Данный сервис использует модель CatBoost для классификации пациентов по уровню риска сердечных заболеваний.
 
-## Структура
-См. дерево проекта в корне репозитория.
+## Архитектура проекта (ООП)
+- `ModelTrainer`: Класс для обучения модели и подбора порога классификации.
+- `Preprocessor`: Класс для очистки данных и заполнения пропусков.
+- `HeartRiskPredictor`: Класс для загрузки модели и инференса.
+- `FastAPI`: Интерфейс для доступа к модели через HTTP.
 
-## Установка
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Linux / Mac
-# .venv\Scripts\activate   # Windows
-pip install -r requirements.txt
-```
-## Для Windows:
+## Как запустить
+1. Установка: `pip install -r requirements.txt`
+2. Обучение: `python train_now.py` (создаст модель в /models)
+3. Запуск API: `python -m uvicorn scripts.train:app --port 8000`
 
-.venv\Scripts\activate
-pip install -r requirements.txt
-"""Core package for heart attack risk prediction project."""
-
-## Обучение модели
-```python scripts/train.py --train-path data/heart_train.csv --model-path models/model.cbm --metadata-path models/metadata.json ```
-## Предсказание
-``` python scripts/predict.py --test-path data/heart_test.csv --model-path models/model.cbm --metadata-path models/metadata.json --output-path data/predictions.csv ```
-
-## Запуск API
-
-```uvicorn api.main:app --reload```
-
-## Пример запроса
-```curl -X POST "http://127.0.0.1:8000/predict" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "csv_path": "data/heart_test.csv",
-    "output_path": "data/predictions.csv"
-  }'
-```
-## Формат ответа
-
-```{
-  "status": "ok",
-  "rows": 966,
-  "output_path": "data/predictions.csv"
-}
-```
+## API Endpoints
+- `GET /`: Проверка работоспособности.
+- `POST /predict`: Принимает путь к CSV и возвращает результаты в формате JSON.
